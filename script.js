@@ -1,1 +1,105 @@
+var firebaseConfig = {
+apiKey: "YOURKEY",
+authDomain: "YOURDOMAIN",
+databaseURL: "YOURDATABASEURL",
+projectId: "YOURPROJECTID",
+storageBucket: "YOURBUCKET"
+};
 
+firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
+var storage = firebase.storage();
+
+var username="";
+
+function start(){
+
+username=document.getElementById("username").value;
+
+if(username==""){
+alert("Enter username");
+return;
+}
+
+document.getElementById("usernameBox").style.display="none";
+document.getElementById("postSection").style.display="block";
+
+loadPosts();
+
+}
+
+function uploadPost(){
+
+var text=document.getElementById("textPost").value;
+
+var file=document.getElementById("imageUpload").files[0];
+
+var date=new Date().toISOString();
+
+if(file){
+
+var storageRef=storage.ref("images/"+file.name);
+
+storageRef.put(file).then(function(snapshot){
+
+snapshot.ref.getDownloadURL().then(function(url){
+
+savePost(text,url,date);
+
+});
+
+});
+
+}else{
+
+savePost(text,"",date);
+
+}
+
+}
+
+function savePost(text,image,date){
+
+database.ref("posts/"+date).set({
+
+username:username,
+text:text,
+image:image,
+date:date
+
+});
+
+}
+
+function loadPosts(){
+
+database.ref("posts").on("value",function(snapshot){
+
+var posts=snapshot.val();
+
+var html="";
+
+for(var key in posts){
+
+var p=posts[key];
+
+html+=`
+<div class="post">
+
+<h3>${p.username}</h3>
+<p>${p.text}</p>
+<img src="${p.image}" width="200">
+<br>
+<small>${p.date}</small>
+
+</div>
+`;
+
+}
+
+document.getElementById("posts").innerHTML=html;
+
+});
+
+}
