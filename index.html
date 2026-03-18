@@ -1,71 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>JustTypeWeb</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
+    <title>Seek Streaming Player</title>
 </head>
+<body style="background:black; color:white; text-align:center;">
 
-<body>
+<h2>🎬 My Streaming Website</h2>
 
-<header>
+<video id="player" controls width="90%"></video>
 
+<script>
+const API_KEY = "8c649b4dea9ca0bdcbe60cbf";
 
-<h1 class="logo">JustTypeWeb</h1>
-
-<button id="loginBtn">Login with Google</button>
-
-</header>
-
-<div class="container">
-
-<div id="usernameBox" class="username-box" style="display:none">
-
-<h3>Create Username</h3>
-
-<input id="usernameInput" placeholder="Unique username">
-
-<button id="saveUsername">Save</button>
-
-</div>
-
-
-<div class="post-box">
-
-<textarea id="postText" placeholder="Write something..."></textarea>
-
-<button id="postBtn">Post</button>
-
-</div>
-
-
-<h2>Latest Posts</h2>
-
-<div id="posts"></div>
-
-
-<div class="donate">
-
-<h3>Support Developer ❤️</h3>
-
-<script src="https://checkout.razorpay.com/v1/payment-button.js"
-data-payment_button_id="rzp_live_SRA29FyRhArgmI"
-async>
+fetch("https://api.seekstreaming.com/videos", {
+    headers: {
+        "Authorization": "Bearer " + API_KEY
+    }
+})
+.then(res => res.json())
+.then(data => {
+    // Example: first video
+    const videoUrl = data.videos[0].url;
+    document.getElementById("player").src = videoUrl;
+});
 </script>
-
-</div>
-
-</div>
-
-<script src="app.js"></script>
 
 </body>
 </html>
