@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const API_KEY = "8c649b4dea9ca0bdcbe60cbf";
+const API_KEY = "148f3832eadb4c4049cadfd9";
 
 app.get('/videos', async (req, res) => {
     const response = await fetch("https://api.seekstreaming.com/videos", {
