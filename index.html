@@ -10,6 +10,7 @@
       background: black;
       color: white;
       text-align: center;
+      font-family: Arial, sans-serif;
     }
 
     .player-container {
@@ -25,6 +26,22 @@
       border: none;
     }
 
+    .contact-btn {
+      margin: 20px;
+      padding: 12px 25px;
+      background: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .contact-btn:hover {
+      background: #ff1a1a;
+    }
+
     @media (max-width: 600px) {
       .player-container iframe {
         height: 220px;
@@ -35,15 +52,19 @@
 
 <body>
 
-  <h2>🎬 RENT STREAMING </h2>
+  <h2>🎬 RENT STREAMING</h2>
 
   <div class="player-container">
     <iframe 
-src="https://streaming.seekplayer.me/#h6pim" width="100%" height="100%" frameborder="0" allowfullscreen>
- </iframe>
-
-
+      src="https://streaming.seekplayer.me/#h6pim" width="100%" height="100%" frameborder="0" allowfullscreen>
+ 
+    </iframe>
   </div>
+
+  <!-- Contact Button -->
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScvXN7s8PSEej5NL7FbwjQLk9Udgk-a18zcfbKSU0wqhLoxng/viewform?usp=dialog" target="_blank">
+    <button class="contact-btn">📩 Contact Information</button>
+  </a>
 
 </body>
 </html>
